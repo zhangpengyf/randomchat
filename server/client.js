@@ -41,6 +41,10 @@ var maxRetries = 10;	//最多重新连接十次
 		sendStartChat();
 	}
 
+	function sendCommand(json) {
+		conn.write(json);
+		conn.write('\0');
+	}
 	function sendLogin() {
 		var json = {
 			command: 'login',
@@ -49,7 +53,7 @@ var maxRetries = 10;	//最多重新连接十次
 		}
 		var string = JSON.stringify(json)
 		console.log('send login,length:' + string.length);
-		conn.write(string);
+		sendCommand(string);
 	}
 	function sendSdp() {
 		var json = {
@@ -58,16 +62,16 @@ var maxRetries = 10;	//最多重新连接十次
 		}
 		var string = JSON.stringify(json)
 		console.log('send sdp,length:' + string.length);
-		conn.write(string);
+		sendCommand(string);
 	}
 	function sendStartChat() {
 		var json = {
 			command: 'startchat',
-			video:true,
-			audio:true
+			video: true,
+			audio: true
 		}
 		var string = JSON.stringify(json)
 		console.log('send startchat,length:' + string.length);
-		conn.write(string);
+		sendCommand(string);
 	}
 })();
