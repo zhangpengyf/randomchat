@@ -1,13 +1,14 @@
 var net = require('net');
-var port = 4000;
+
+//连接时设置最多连接十次，并且开启定时器三秒后再连接
+function connect(index) {
+	var port = 4000;
 var quitting = false;
 var conn;
 var retryTimeout = 3000;	//三秒，定义三秒后重新连接
 var retriedTimes = 0;	//记录重新连接的次数
 var maxRetries = 10;	//最多重新连接十次
 
-//连接时设置最多连接十次，并且开启定时器三秒后再连接
-(function connect() {
 	function reconnect() {
 		if (retriedTimes >= maxRetries) {
 			throw new Error('Max retries have been exceeded, I give up.');
@@ -74,4 +75,9 @@ var maxRetries = 10;	//最多重新连接十次
 		console.log('send startchat,length:' + string.length);
 		sendCommand(string);
 	}
-})();
+};
+
+var i;
+for(i = 0;i < 10; i++) {
+	connect();
+}
