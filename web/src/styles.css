@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+.float-right{
+    float:right;
+}
+.logo{
+    margin:10px 5px;
+    padding: 7px 5px;
+    background-color: RGB(129,137,162);
+    text-align:center;
+    border:1px solid #a1a1a1;
+    border-radius:3px;
+}
+button {
+    margin:10px 5px;
+    padding: 10px 5px;
+    background-color: RGB(205,212,222);
+    text-align:center;
+    border:1px solid #a1a1a1;
+    border-radius:3px;
+}
+
+.header {
+    background-color: RGB(229,229,229);
+}
