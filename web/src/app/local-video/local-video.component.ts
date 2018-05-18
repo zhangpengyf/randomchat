@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-local-video',
@@ -13,9 +13,14 @@ export class LocalVideoComponent implements OnInit {
 
   private localStream = null;
 
+  @ViewChild('video_preview') videoref : ElementRef;
+  public video : HTMLVideoElement;
+
   constructor() { }
 
   ngOnInit() {
+
+    this.video = this.videoref.nativeElement;
     var obj = this;
     window.navigator.mediaDevices.enumerateDevices()
       .then(function (deviceInfos) {
@@ -35,10 +40,12 @@ export class LocalVideoComponent implements OnInit {
     };
     window.navigator.mediaDevices.getUserMedia(constraints).
       then(function (stream) {
-        var localVideo = document.getElementById('video-preview');
-        localVideo.srcObject = stream;
-        obj.localStream = stream;
-        obj.openPeerconnection(obj);
+        //let localVideo : HTMLVideoElement = document.getElementById('video-preview') as HTMLVG;
+        //localVideo.srcObject = stream;
+        this.video.src  = 'http://1253619058.vod2.myqcloud.com/327d0be7vodgzp1253619058/004285dd7447398155873749913/zOaPx3hdWJIA.mp4?t=5b116d80&us=1527868800&sign=387435e065b62c7afba7a68112b00891';
+        this.video.play();
+        //obj.localStream = stream;
+        //obj.openPeerconnection(obj);
       }).catch(function () {
       });
   }
